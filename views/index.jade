@@ -1,0 +1,251 @@
+extends layout
+
+block content
+	h1= title
+	p Welcome to #{title}
+
+	form(action='newusers', method='post')
+		#course.container
+			h2 Location Details:
+			.div
+				label(for='location') Location:
+				input(id='location', type='text',value='',placeholder='',name='location')
+			.div
+				label(for='dates') Start Date (mm/dd/yyyy):
+				input(id='dates', type='text',value='',placeholder='',name='dates')
+			.div
+				label(for='instructor1') Instructor 1:
+				input(id='instructor1', type='text',value='',placeholder='',name='instructor1')
+			.div
+				label(for='instructor2') Instructor 2:
+				input(id='instructor2', type='text',value='',placeholder='',name='instructor2')
+			.div
+				a(href="javascript:saveLocation()") Save Location Details
+		#personal.container
+			h2 Personal Details:
+			.div
+				label(for='name') Name:
+				input(id='name', type='text',value='',placeholder='',name='name')
+			.div
+				label(for='company') Company:
+				input(id='company', type='text',value='',placeholder='',name='company')
+			.div
+				label(for='email') Email:
+				input(id='email', type='text',value='',placeholder='',name='email')
+			.div
+				label(for='phone') Phone: (xxx-xxx-xxxx)
+				input(id='phone', type='text',value='',placeholder='',name='phone')
+		#role.container
+			h2 Primary Roles:
+			.div
+				input(type="checkbox", name="roledev", checked=false).checkbox
+				label(for='checkbox') Developer
+			.div
+				input(type="checkbox", name="roledba", checked=false).checkbox
+				label(for='checkbox') DBA
+			.div
+				input(type="checkbox", name="rolearchitect", checked=false).checkbox		
+				label(for='checkbox') Architect
+			.div
+				input(type="checkbox", name="roleops", checked=false).checkbox
+				label(for='checkbox') DevOps/Systems Admin
+			.div
+				input(type="checkbox", name="rolemanagement", checked=false).checkbox
+				label(for='checkbox') Management / Exec
+			.div
+				input(type="checkbox", name="roleother", checked=false).checkbox
+				label(for='checkbox') Other:
+				input(id='role-other-text', type='text',value='',placeholder='',name='roleothertext')
+		#topic.container
+			#topic-left.container
+				h2 Goals:
+				.div
+					input(type="checkbox", name="goaldeploy", checked=false).checkbox
+					label(for='checkbox') Deploying Elasticsearch
+				.div
+					input(type="checkbox", name="goalcluster", checked=false).checkbox
+					label(for='checkbox') Cluster Management		
+				.div
+					input(type="checkbox", name="goalsearch", checked=false).checkbox
+					label(for='checkbox') Search, Suggestion & Proximity
+				.div
+					input(type="checkbox", name="goalanalysis", checked=false).checkbox
+					label(for='checkbox') Text Analysis				
+				.div
+					input(type="checkbox", name="goalaggregations", checked=false).checkbox
+					label(for='checkbox') Aggregations
+				.div
+					input(type="checkbox", name="goalmappings", checked=false).checkbox
+					label(for='checkbox') Mappings, Templates & Settings
+				.div
+					input(type="checkbox", name="goallucene", checked=false).checkbox
+					label(for='checkbox') Lucene Internals & Configuration		
+				.div
+					input(type="checkbox", name="goalbackup", checked=false).checkbox
+					label(for='checkbox') Backup & Restore
+			#topic-right.container
+				.div
+					input(type="checkbox", name="goalclients", checked=false).checkbox
+					label(for='checkbox') Clients
+				.div
+					input(type="checkbox", name="goalindexes", checked=false).checkbox
+					label(for='checkbox') Index Maintenance
+				.div
+					input(type="checkbox", name="goalrelevancy", checked=false).checkbox
+					label(for='checkbox') Relevancy & Custom Scoring
+				.div
+					input(type="checkbox", name="goalpercolation", checked=false).checkbox
+					label(for='checkbox') Percolation
+				.div
+					input(type="checkbox", name="goalgeo", checked=false).checkbox
+					label(for='checkbox') Geo-location
+				.div
+					input(type="checkbox", name="goalhadoop", checked=false).checkbox
+					label(for='checkbox') Integrating With Hadoop
+				.div
+					input(type="checkbox", name="goalmonitoring", checked=false).checkbox
+					label(for='checkbox') Monitoring
+				.div
+					input(type="checkbox", name="goalrelations", checked=false).checkbox
+					label(for='checkbox') Document Relations & Schema Design
+		#cluster-size.container
+			h2 How large of an Elasticsearch cluster do you currently or plan on using?
+			.div
+				input(type="checkbox", name="sizeless3", checked=false).checkbox
+				label(for='checkbox') 3 or fewer nodes
+			.div
+				input(type="checkbox", name="size4to8", checked=false).checkbox
+				label(for='checkbox') 4 - 8 nodes
+			.div
+				input(type="checkbox", name="size8to23", checked=false).checkbox
+				label(for='checkbox') 9 - 23 nodes
+			.div
+				input(type="checkbox", name="sizemore23", checked=false).checkbox
+				label(for='checkbox') 23+ nodes
+		#resources.container
+			h2 Which resources do you currently use to learn about Elasticsearch?
+			.div
+				input(type="checkbox", name="resofficial", checked=false).checkbox
+				label(for='checkbox') Official Documentation
+			.div
+				input(type="checkbox", name="reswebinars", checked=false).checkbox
+				label(for='checkbox') Webinars
+			.div
+				input(type="checkbox", name="resblogs", checked=false).checkbox
+				label(for='checkbox') Blogs
+			.div
+				input(type="checkbox", name="resstack", checked=false).checkbox
+				label(for='checkbox') Stack Overflow
+			.div
+				input(type="checkbox", name="resdefguide", checked=false).checkbox
+				label(for='checkbox') Elasticsearch: Definitive Guide
+			.div
+				input(type="checkbox", name="resmeetups", checked=false).checkbox
+				label(for='checkbox') Meetups
+			.div
+				input(type="checkbox", name="resyoutube", checked=false).checkbox
+				label(for='checkbox') YouTube
+			.div
+				input(type="checkbox", name="resother", checked=false).checkbox
+				label(for='checkbox') Other:
+				input(id='res-other-text', type='text',value='',placeholder='',name='resothertext')
+		#use.container
+			h2 How do you currently use Elasticsearch?
+			.div
+				input(type="checkbox", name="usesearch", checked=false).checkbox
+				label(for='checkbox') Full-text search
+			.div
+				input(type="checkbox", name="uselogging", checked=false).checkbox
+				label(for='checkbox') Log Analysis / event data
+			.div
+				input(type="checkbox", name="useanalytics", checked=false).checkbox
+				label(for='checkbox') Application Analytics
+			.div
+				input(type="checkbox", name="usedatastore", checked=false).checkbox
+				label(for='checkbox') Primary datastore
+			.div
+				input(type="checkbox", name="usealerting", checked=false).checkbox
+				label(for='checkbox') Alerting & Notifications
+			.div
+				input(type="checkbox", name="usegeo", checked=false).checkbox
+				label(for='checkbox') Geo-location Searching
+			.div
+				input(type="checkbox", name="useddp", checked=false).checkbox
+				label(for='checkbox') Distributed Data processing
+			.div
+			input(type="checkbox", name="useother", checked=false).checkbox
+			label(for='checkbox') Other:
+			input(id='res-other-text', type='text',value='',placeholder='',name='useothertext')
+		#stage.container
+			h2 What stage are you currently using Elasticsearch?
+			.div
+				input(type="checkbox", name="stageprod", checked=false).checkbox
+				label(for='checkbox') Production
+			.div
+				input(type="checkbox", name="stagedev", checked=false).checkbox
+				label(for='checkbox') Development
+			.div
+				input(type="checkbox", name="stageeval", checked=false).checkbox
+				label(for='checkbox') Evaluation / Prototyping
+			.div
+				input(type="checkbox", name="stagenot", checked=false).checkbox
+				label(for='checkbox') Not using at all
+		#cert.container
+			h2 Would you be interested in Elasticsearch Certification?
+			.div
+				input(type="checkbox", name="certyes", checked=false).checkbox
+				label(for='checkbox') Yes	
+			.div
+				input(type="checkbox", name="certno", checked=false).checkbox
+				label(for='checkbox') No
+		#auth.container
+			h2 Is authentication, auditing and role-based access control an Elasticsearch feature you are interested in?
+			.div
+				input(type="checkbox", name="authyes", checked=false).checkbox
+				label(for='checkbox') Yes	
+			.div
+				input(type="checkbox", name="authno", checked=false).checkbox
+				label(for='checkbox') No	
+		#support.container
+			h2 Are you aware Elasticsearch offers Support Subscription services?
+			.div
+				input(type="checkbox", name="supportyes", checked=false).checkbox
+				label(for='checkbox') Yes	
+			.div
+				input(type="checkbox", name="supportno", checked=false).checkbox
+				label(for='checkbox') No
+		#comments.container
+			h2 Comments
+			.div
+				textarea(id='commentstext', type='textarea',value='',placeholder='',name='comments')
+		#sub.container
+			.test
+				input(type='submit',value='enter')
+
+	script(type='text/javascript').
+		var l = getCookie("location");
+		var d = getCookie('date');
+		var i1 = getCookie('ins1');
+		var i2 = getCookie('ins2');
+		if(l !== '') { var e = document.getElementById('location'); e.value = l;}
+		if(d !== '') { var e = document.getElementById('dates'); e.value = d;}
+		if(i1 !== '') { var e = document.getElementById('instructor1'); e.value = i1;}
+		if(i2 !== '') { var e = document.getElementById('instructor2'); e.value = i2;}
+		
+		function saveLocation() {
+		document.cookie = "location=" + document.getElementById('location').value;
+		document.cookie = "date=" + document.getElementById('dates').value;
+		document.cookie = "ins1=" + document.getElementById('instructor1').value;
+		document.cookie = "ins2=" + document.getElementById('instructor2').value;
+		alert("Location details saved");
+		}
+		function getCookie(cname) {
+		var name = cname + "=";
+		var ca = document.cookie.split(';');
+		for(var i=0; i<ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1);
+		if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+		}
+		return "";
+		}
