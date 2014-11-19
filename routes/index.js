@@ -25,7 +25,7 @@ router.post('/newusers', function(req, res) {
 	console.log(survey);
 
 	client.create( {
-		index : 'surveys2',
+		index : 'surveys',
 		type : 'v1',
 		body : survey
 	}, function(error, response) { 
