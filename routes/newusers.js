@@ -12,7 +12,7 @@ var client = new elasticsearch.Client({
 router.get('/', function(req, res) {
 if( req.param('id') !== '') {
 client.delete( {
-	index : 'surveys2',
+	index : 'surveys',
 	type : 'v1',
 	id : req.param('id')
 },
